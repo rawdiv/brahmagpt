@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrahmaGPT - India's First Open-Source Conversational AI</title>
+    <meta name="description" content="BrahmaGPT - India's first open-source conversational AI, built for the world. Experience the power of customizable, privacy-respecting AI.">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="BrahmaGPT - India's First Open-Source Conversational AI">
+    <meta property="og:description" content="Experience the power of customizable, privacy-respecting AI with BrahmaGPT.">
+    <meta property="og:image" content="https://brahmagpt.ai/og-image.jpg">
+    <meta property="og:url" content="https://brahmagpt.ai/chat">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
+    
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #0ea5e9 0%, #f97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glass-nav {
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(249, 115, 22, 0.1) 100%);
+        }
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.2) 0%, rgba(249, 115, 22, 0.2) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+    <!-- Firebase Configuration -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAasZbHaJAuQ5HJx3J_ebPZ1BCO_gITkEk",
+            authDomain: "brahmallm.firebaseapp.com",
+            projectId: "brahmallm",
+            storageBucket: "brahmallm.appspot.com",
+            messagingSenderId: "193533148969",
+            appId: "1:193533148969:web:365ec1786988f96e238138",
+            measurementId: "G-P4LGFKBS9G"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const analytics = firebase.analytics();
+
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Track page view
+        analytics.logEvent('page_view', {
+            page_title: 'BrahmaGPT Landing Page',
+            page_location: window.location.href,
+            page_path: window.location.pathname
+        });
+    </script>
+
+    <!-- Header -->
+    <header class="fixed w-full glass-nav z-50">
+        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <a href="/" class="text-2xl font-bold gradient-text">BRAHMA</a>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="/" class="hover:text-primary-400 transition-colors">Home</a>
+                <a href="/docs" class="hover:text-primary-400 transition-colors">Docs</a>
+                <a href="/api" class="hover:text-primary-400 transition-colors">API</a>
+                <a href="https://github.com/rawdiv/brahmallm/tree/main/brahma" target="_blank" class="bg-primary-600 hover:bg-primary-700 px-4 py-2 rounded-lg transition-colors">
+                    GitHub
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 hero-gradient">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="flex items-center justify-center mb-6">
+                    <span class="text-4xl mr-2">🇮🇳</span>
+                    <span class="text-sm font-medium bg-primary-900/50 px-3 py-1 rounded-full">Made in India</span>
+                </div>
+                <h1 class="text-6xl font-bold mb-6 gradient-text" data-aos="fade-up">
+                    🧠 Meet BrahmaGPT
+                </h1>
+                <p class="text-2xl text-gray-300 mb-8" data-aos="fade-up" data-aos-delay="100">
+                    India's First Open-Source Conversational AI, Built for the World.
+                </p>
+                <div class="flex justify-center space-x-4" data-aos="fade-up" data-aos-delay="200">
+                    <a href="#try" class="bg-primary-600 hover:bg-primary-700 px-8 py-3 rounded-lg font-semibold transition-colors">
+                        Try BrahmaGPT
+                    </a>
+                    <a href="https://github.com/rawdiv/brahmallm" target="_blank" class="glass-card px-8 py-3 rounded-lg font-semibold">
+                        Contribute
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What is BrahmaGPT Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-8 gradient-text" data-aos="fade-up">🚀 What is BrahmaGPT?</h2>
+                <p class="text-xl text-gray-300 mb-8" data-aos="fade-up" data-aos-delay="100">
+                    BrahmaGPT is the conversational layer of the Brahma LLM ecosystem — a next-gen AI assistant built using the Brahma open-source language model architecture.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8" data-aos="fade-up" data-aos-delay="200">
+                    <div class="glass-card p-6 rounded-xl">
+                        <h3 class="text-xl font-semibold mb-4">Key Features</h3>
+                        <ul class="space-y-4 text-gray-300">
+                            <li class="flex items-start">
+                                <span class="mr-2">🔓</span>
+                                <span>Completely open-source</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2">⚡</span>
+                                <span>Fast and scalable</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2">🧠</span>
+                                <span>Context-aware and task-capable</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2">🌐</span>
+                                <span>Multilingual & India-ready</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2">💻</span>
+                                <span>Locally deployable</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl">
+                        <h3 class="text-xl font-semibold mb-4">For Everyone</h3>
+                        <p class="text-gray-300">
+                            Whether you're a developer, founder, researcher, or just a curious mind — BrahmaGPT gives you the power of a personalized, privacy-respecting AI that you can own, host, and evolve.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center gradient-text" data-aos="fade-up">🔍 Use Cases</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-semibold mb-4">🧑‍💻 For Developers</h3>
+                    <p class="text-gray-300">Debug code, generate boilerplates, explain algorithms, or brainstorm new SaaS ideas — BrahmaGPT acts like your AI pair programmer.</p>
+                </div>
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-xl font-semibold mb-4">📚 For Students & Learners</h3>
+                    <p class="text-gray-300">Get instant answers to complex questions, summarize topics, or even translate across Indian languages.</p>
+                </div>
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-xl font-semibold mb-4">🧠 For Thinkers & Creators</h3>
+                    <p class="text-gray-300">Generate content, write blogs, draft scripts, ideate marketing strategies, or explore fiction with a creative AI co-pilot.</p>
+                </div>
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="400">
+                    <h3 class="text-xl font-semibold mb-4">🏢 For Businesses</h3>
+                    <p class="text-gray-300">Prototype custom chatbots, power internal tools, and integrate smart assistants without vendor lock-in.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-8 gradient-text" data-aos="fade-up">⚙️ How BrahmaGPT Works</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="text-xl font-semibold mb-4">Architecture</h3>
+                        <ul class="space-y-4 text-gray-300">
+                            <li>• Grouped-query attention</li>
+                            <li>• Rotary positional embeddings</li>
+                            <li>• Quantized model variants for speed</li>
+                            <li>• Fine-tuning & RLHF-ready base</li>
+                            <li>• Efficient batching and low-latency inference</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="text-xl font-semibold mb-4">Features</h3>
+                        <ul class="space-y-4 text-gray-300">
+                            <li>✅ Runs locally on consumer-grade GPUs</li>
+                            <li>✅ REST API for easy integration</li>
+                            <li>✅ Scalable with ASGI + Docker + Cloud</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Demo Section -->
+    <section id="try" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold mb-8 gradient-text" data-aos="fade-up">💬 Live Demo</h2>
+                <div class="glass-card p-6 rounded-xl mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                    <div class="aspect-w-16 aspect-h-9">
+                        <video class="w-full h-full object-cover rounded-lg" autoplay muted loop playsinline>
+                            <source src="./demo.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+                <p class="text-gray-300 text-center" data-aos="fade-up" data-aos-delay="200">
+                    See BrahmaGPT in action as it responds to various prompts with accurate, contextual answers.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contribute Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-8 gradient-text" data-aos="fade-up">🤝 Want to Contribute?</h2>
+                <p class="text-xl text-gray-300 mb-8" data-aos="fade-up" data-aos-delay="100">
+                    We're building something big — and we're doing it out in the open. If you're passionate about AI, open-source, and sovereign technology, you're invited to join the movement.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8" data-aos="fade-up" data-aos-delay="200">
+                    <div class="glass-card p-6 rounded-xl">
+                        <h3 class="text-xl font-semibold mb-4">Looking for contributors in:</h3>
+                        <ul class="space-y-4 text-gray-300">
+                            <li>• Frontend: Chat UI, real-time interactions, dark mode aesthetics</li>
+                            <li>• Backend: Streaming APIs, GPU inference optimizations</li>
+                            <li>• LLM Engineers: Prompt tuning, data curation, fine-tuning</li>
+                            <li>• Security: Privacy-first deployments, sandboxing</li>
+                            <li>• Docs: Tutorials, onboarding, Indian language support</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl">
+                        <h3 class="text-xl font-semibold mb-4">Get Involved</h3>
+                        <p class="text-gray-300 mb-6">
+                            This is not a hobby project. This is an opportunity to shape the way India (and the world) talks to machines.
+                        </p>
+                        <div class="space-y-4">
+                            <a href="https://github.com/rawdiv/brahmallm/tree/main/brahma" class="block bg-primary-600 hover:bg-primary-700 px-6 py-3 rounded-lg font-semibold transition-colors text-center">
+                                Contribute on GitHub
+                            </a>
+                            <a href="https://github.com/rawdiv/brahmallm/tree/main/brahma/issues" class="block glass-card px-6 py-3 rounded-lg font-semibold text-center">
+                                View Open Issues
+                            </a>
+                            <a href="mailto:dev@brahma.ai" class="block glass-card px-6 py-3 rounded-lg font-semibold text-center">
+                                Contact Us
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hosting Section -->
+    <section class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-8 gradient-text" data-aos="fade-up">📦 Hosting BrahmaGPT</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="text-xl font-semibold mb-4">Available Now</h3>
+                        <ul class="space-y-4 text-gray-300">
+                            <li>• Docker-based deployment</li>
+                            <li>• Firebase-ready frontend integrations</li>
+                            <li>• Customizable prompts, personalities, and tokens</li>
+                            <li>• Option to self-host inference or connect to HuggingFace APIs</li>
+                            <li>• Chat streaming using SSE/WebSocket</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="text-xl font-semibold mb-4">Coming Soon</h3>
+                        <ul class="space-y-4 text-gray-300">
+                            <li>• GPT Agents with tools like code interpreter & file reader</li>
+                            <li>• BrahmaGPT on mobile</li>
+                            <li>• Plugins, memory, and voice chat</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Licensing Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-8 gradient-text" data-aos="fade-up">🧾 Licensing & Ethics</h2>
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="100">
+                    <p class="text-xl text-gray-300 mb-8">
+                        BrahmaGPT is released under the Apache 2.0 License — free to use, free to build upon, and built for community ownership.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">We believe in:</h3>
+                            <ul class="space-y-4 text-gray-300">
+                                <li>✅ Transparency</li>
+                                <li>✅ Open models, not closed gates</li>
+                                <li>✅ Local data sovereignty</li>
+                                <li>✅ Responsible AI for all</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">Your AI. Your Rules.</h3>
+                            <p class="text-gray-300">
+                                AI should empower, not extract. BrahmaGPT is not a black box, it's a toolkit. Build your own ChatGPT. Customize it. Extend it. Run it on your terms.
+                            </p>
+                            <p class="text-gray-300 mt-4 italic">
+                                Because the future of AI shouldn't belong to a few companies. It should belong to all of us.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="flex flex-col sm:flex-row justify-center gap-4" data-aos="fade-up">
+                    <a href="#try" class="bg-primary-600 hover:bg-primary-700 px-8 py-3 rounded-lg font-semibold transition-colors">
+                        👉 Try BrahmaGPT Now
+                    </a>
+                    <a href="https://github.com/rawdiv/brahmallm/tree/main/brahma" class="glass-card px-8 py-3 rounded-lg font-semibold">
+                        👨‍💻 Contribute to the Project
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gray-800 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold gradient-text mb-4">BRAHMA</h3>
+                    <p class="text-gray-400">India's own open-source large language model.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="/docs" class="text-gray-400 hover:text-white transition-colors">Documentation</a></li>
+                        <li><a href="/api" class="text-gray-400 hover:text-white transition-colors">API</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Community</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://github.com/rawdiv/brahmallm/tree/main/brahma" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.11.82-.26.82-.577v-2.17c-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.73.083-.73 1.205.084 1.84 1.236 1.84 1.236 1.07 1.835 2.807 1.305 3.492.997.108-.775.42-1.305.763-1.605-2.665-.3-5.467-1.332-5.467-5.93 0-1.31.467-2.382 1.236-3.22-.124-.303-.536-1.523.116-3.176 0 0 1.008-.322 3.3 1.23a11.52 11.52 0 013.003-.404c1.02.005 2.045.137 3.003.404 2.29-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.873.118 3.176.77.838 1.235 1.91 1.235 3.22 0 4.61-2.807 5.625-5.48 5.92.43.37.823 1.102.823 2.222v3.293c0 .32.218.694.825.576C20.565 21.798 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>© 2024 BRAHMA. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brahma Documentation - Your Own LLM</title>
+    <meta name="description" content="Comprehensive documentation for Brahma - India's own open-source large language model framework.">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Brahma Documentation - Your Own LLM">
+    <meta property="og:description" content="Comprehensive documentation for Brahma - India's own open-source large language model framework.">
+    <meta property="og:image" content="https://brahmagpt.ai/og-image.jpg">
+    <meta property="og:url" content="https://brahmagpt.ai/docs">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #0ea5e9 0%, #f97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glass-nav {
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .code-block {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: monospace;
+            overflow-x: auto;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 280px;
+            background: rgba(0, 0, 0, 0.8);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            overflow-y: auto;
+        }
+        .content {
+            margin-left: 280px;
+            padding: 2rem;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+    <!-- Header -->
+    <header class="fixed w-full glass-nav z-50">
+        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <a href="/" class="text-2xl font-bold gradient-text">BRAHMA</a>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="/" class="hover:text-primary-400 transition-colors">Home</a>
+                <a href="/brahmagpt" class="hover:text-primary-400 transition-colors">BrahmaGPT</a>
+                <a href="/api" class="hover:text-primary-400 transition-colors">API</a>
+                <a href="https://github.com/rawdiv/brahmallm/tree/main/brahma" target="_blank" class="bg-primary-600 hover:bg-primary-700 px-4 py-2 rounded-lg transition-colors">
+                    GitHub
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar pt-20">
+        <nav class="space-y-4">
+            <div class="space-y-2">
+                <h3 class="text-lg font-semibold text-primary-400">Getting Started</h3>
+                <ul class="space-y-2">
+                    <li><a href="#overview" class="text-gray-400 hover:text-white transition-colors">Overview</a></li>
+                    <li><a href="#features" class="text-gray-400 hover:text-white transition-colors">Features</a></li>
+                    <li><a href="#installation" class="text-gray-400 hover:text-white transition-colors">Installation</a></li>
+                    <li><a href="#quick-start" class="text-gray-400 hover:text-white transition-colors">Quick Start</a></li>
+                </ul>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-lg font-semibold text-primary-400">Core Concepts</h3>
+                <ul class="space-y-2">
+                    <li><a href="#model-architecture" class="text-gray-400 hover:text-white transition-colors">Model Architecture</a></li>
+                    <li><a href="#training-pipeline" class="text-gray-400 hover:text-white transition-colors">Training Pipeline</a></li>
+                    <li><a href="#inference" class="text-gray-400 hover:text-white transition-colors">Inference</a></li>
+                    <li><a href="#web-platform" class="text-gray-400 hover:text-white transition-colors">Web Platform</a></li>
+                </ul>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-lg font-semibold text-primary-400">Advanced Topics</h3>
+                <ul class="space-y-2">
+                    <li><a href="#custom-training" class="text-gray-400 hover:text-white transition-colors">Custom Training</a></li>
+                    <li><a href="#fine-tuning" class="text-gray-400 hover:text-white transition-colors">Fine-tuning</a></li>
+                    <li><a href="#deployment" class="text-gray-400 hover:text-white transition-colors">Deployment</a></li>
+                    <li><a href="#api-reference" class="text-gray-400 hover:text-white transition-colors">API Reference</a></li>
+                </ul>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content pt-20">
+        <!-- Overview Section -->
+        <section id="overview" class="mb-16">
+            <h1 class="text-4xl font-bold mb-6 gradient-text">Brahma Documentation</h1>
+            <p class="text-xl text-gray-300 mb-8">
+                Brahma is a comprehensive framework for training and using your own large language model (LLM) similar to ChatGPT. This project includes everything you need to train, fine-tune, and deploy your custom LLM.
+            </p>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 gradient-text">Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="glass-card p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-4">Complete Model Architecture</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                        <li>Transformer-based decoder-only architecture</li>
+                        <li>RoPE embeddings</li>
+                        <li>Grouped-query attention</li>
+                        <li>Modern optimization techniques</li>
+                    </ul>
+                </div>
+                <div class="glass-card p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-4">Training Pipeline</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                        <li>Mixed precision training</li>
+                        <li>Gradient accumulation</li>
+                        <li>Learning rate scheduling</li>
+                        <li>Efficient data loading</li>
+                    </ul>
+                </div>
+                <div class="glass-card p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-4">Inference Tools</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                        <li>Text generation interface</li>
+                        <li>Chat completion</li>
+                        <li>Batched inference</li>
+                        <li>Quantization support</li>
+                    </ul>
+                </div>
+                <div class="glass-card p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-4">Web Platform</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                        <li>User authentication</li>
+                        <li>Model management</li>
+                        <li>Training monitoring</li>
+                        <li>API key management</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Installation Section -->
+        <section id="installation" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 gradient-text">Installation</h2>
+            <div class="glass-card p-6 rounded-xl">
+                <h3 class="text-xl font-semibold mb-4">Requirements</h3>
+                <p class="text-gray-300 mb-4">Install the required packages:</p>
+                <div class="code-block">
+                    <code>pip install -r requirements.txt</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Start Section -->
+        <section id="quick-start" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 gradient-text">Quick Start</h2>
+            <div class="space-y-8">
+                <div class="glass-card p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-4">1. Generate Sample Data (Optional)</h3>
+                    <div class="code-block">
+                        <code>python train.py --create_sample_data --sample_data_size 1000</code>
+                    </div>
+                </div>
+                <div class="glass-card p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-4">2. Train Your Model</h3>
+                    <div class="code-block">
+                        <code>python train.py --config config/default_config.json</code>
+                    </div>
+                    <p class="text-gray-300 mt-4">For distributed training:</p>
+                    <div class="code-block">
+                        <code>python -m torch.distributed.launch --nproc_per_node=N train.py --config config/default_config.json</code>
+                    </div>
+                </div>
+                <div class="glass-card p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-4">3. Chat with Your Model</h3>
+                    <div class="code-block">
+                        <code>python -m inference.chat --model_path checkpoints/checkpoint-final.pt</code>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Model Architecture Section -->
+        <section id="model-architecture" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 gradient-text">Model Architecture</h2>
+            <div class="glass-card p-6 rounded-xl">
+                <h3 class="text-xl font-semibold mb-4">Configuration</h3>
+                <p class="text-gray-300 mb-4">Customize the model architecture in config/default_config.json:</p>
+                <div class="code-block">
+                    <code>{
+  "model_config": {
+    "vocab_size": 32000,
+    "hidden_size": 4096,
+    "intermediate_size": 11008,
+    "num_hidden_layers": 32,
+    "num_attention_heads": 32,
+    "num_key_value_heads": 8,
+    "max_position_embeddings": 4096
+  }
+}</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Training Pipeline Section -->
+        <section id="training-pipeline" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 gradient-text">Training Pipeline</h2>
+            <div class="glass-card p-6 rounded-xl">
+                <h3 class="text-xl font-semibold mb-4">Training Configuration</h3>
+                <p class="text-gray-300 mb-4">Adjust training parameters in config/default_config.json:</p>
+                <div class="code-block">
+                    <code>{
+  "training_config": {
+    "learning_rate": 1e-4,
+    "weight_decay": 0.01,
+    "warmup_steps": 500,
+    "max_steps": 100000,
+    "gradient_accumulation_steps": 1,
+    "mixed_precision": true,
+    "batch_size": 8
+  }
+}</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Custom Training Section -->
+        <section id="custom-training" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 gradient-text">Custom Training</h2>
+            <div class="glass-card p-6 rounded-xl">
+                <h3 class="text-xl font-semibold mb-4">Preparing Your Data</h3>
+                <p class="text-gray-300 mb-4">Prepare your data in jsonl format:</p>
+                <div class="code-block">
+                    <code>{"text": "Your training example here"}</code>
+                </div>
+                <p class="text-gray-300 mt-4">Update the data configuration:</p>
+                <div class="code-block">
+                    <code>{
+  "data_config": {
+    "dataset_path": "path/to/your/data",
+    "train_split": "train",
+    "validation_split": "validation",
+    "text_column": "text"
+  }
+}</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fine-tuning Section -->
+        <section id="fine-tuning" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 gradient-text">Fine-tuning</h2>
+            <div class="glass-card p-6 rounded-xl">
+                <h3 class="text-xl font-semibold mb-4">Fine-tuning Process</h3>
+                <p class="text-gray-300 mb-4">To fine-tune an existing checkpoint:</p>
+                <div class="code-block">
+                    <code>python train.py --config config/finetune_config.json --resume_from_checkpoint path/to/checkpoint.pt</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deployment Section -->
+        <section id="deployment" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 gradient-text">Deployment</h2>
+            <div class="glass-card p-6 rounded-xl">
+                <h3 class="text-xl font-semibold mb-4">Exporting Models</h3>
+                <p class="text-gray-300 mb-4">Export your model to ONNX format:</p>
+                <div class="code-block">
+                    <code>python -m conversion.export_onnx --model_path checkpoints/checkpoint-final.pt --output_path model.onnx</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- API Reference Section -->
+        <section id="api-reference" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 gradient-text">API Reference</h2>
+            <div class="glass-card p-6 rounded-xl">
+                <h3 class="text-xl font-semibold mb-4">Python Client</h3>
+                <div class="code-block">
+                    <code>import brahma
+
+# Initialize the API client
+client = brahma.Client(api_key="your-api-key")
+
+# Make a chat completion request
+response = client.chat.completions.create(
+    model="brahma-7b",
+    messages=[
+        {"role": "user", "content": "Hello, how are you?"}
+    ]
+)
+
+print(response.choices[0].message.content)</code>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gray-800 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold gradient-text mb-4">BRAHMA</h3>
+                    <p class="text-gray-400">India's own open-source large language model.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="/docs" class="text-gray-400 hover:text-white transition-colors">Documentation</a></li>
+                        <li><a href="/api" class="text-gray-400 hover:text-white transition-colors">API</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Community</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://github.com/rawdiv/brahmallm/tree/main/brahma" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.11.82-.26.82-.577v-2.17c-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.73.083-.73 1.205.084 1.84 1.236 1.84 1.236 1.07 1.835 2.807 1.305 3.492.997.108-.775.42-1.305.763-1.605-2.665-.3-5.467-1.332-5.467-5.93 0-1.31.467-2.382 1.236-3.22-.124-.303-.536-1.523.116-3.176 0 0 1.008-.322 3.3 1.23a11.52 11.52 0 013.003-.404c1.02.005 2.045.137 3.003.404 2.29-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.873.118 3.176.77.838 1.235 1.91 1.235 3.22 0 4.61-2.807 5.625-5.48 5.92.43.37.823 1.102.823 2.222v3.293c0 .32.218.694.825.576C20.565 21.798 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>© 2024 BRAHMA. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html> 

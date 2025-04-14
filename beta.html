@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brahma Beta - Your Own LLM Project</title>
+    <meta name="description" content="Join the Brahma beta program - India's own open-source large language model framework.">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Brahma Beta - Your Own LLM Project">
+    <meta property="og:description" content="Join the Brahma beta program - India's own open-source large language model framework.">
+    <meta property="og:image" content="https://brahmagpt.ai/og-image.jpg">
+    <meta property="og:url" content="https://brahmagpt.ai/beta">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #0ea5e9 0%, #f97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glass-nav {
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .code-block {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: monospace;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+    <!-- Header -->
+    <header class="fixed w-full glass-nav z-50">
+        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <a href="/" class="text-2xl font-bold gradient-text">BRAHMA</a>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="/" class="hover:text-primary-400 transition-colors">Home</a>
+                <a href="/docs" class="hover:text-primary-400 transition-colors">Docs</a>
+                <a href="/api" class="hover:text-primary-400 transition-colors">API</a>
+                <a href="https://github.com/yourusername/brahmagpt" target="_blank" class="bg-primary-600 hover:bg-primary-700 px-4 py-2 rounded-lg transition-colors">
+                    GitHub
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 gradient-text">Brahma: Your Own LLM Project</h1>
+                <p class="text-xl text-gray-300 mb-8">Train, Fine-Tune, and Deploy Custom Large Language Models</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#get-started" class="bg-primary-600 hover:bg-primary-700 px-8 py-3 rounded-lg text-lg font-semibold transition-colors">
+                        Get Started
+                    </a>
+                    <a href="https://github.com/yourusername/brahmagpt" target="_blank" class="bg-gray-800 hover:bg-gray-700 px-8 py-3 rounded-lg text-lg font-semibold transition-colors">
+                        Explore on GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Key Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up">
+                    <h3 class="text-xl font-semibold mb-4">Complete Model Architecture</h3>
+                    <p class="text-gray-300">Transformer-based decoder-only architecture with modern techniques like RoPE embeddings and grouped-query attention.</p>
+                </div>
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-semibold mb-4">Training Pipeline</h3>
+                    <p class="text-gray-300">Efficient training with mixed precision, gradient accumulation, and learning rate scheduling.</p>
+                </div>
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-xl font-semibold mb-4">Inference Tools</h3>
+                    <p class="text-gray-300">Text generation and chat interfaces for easy model usage.</p>
+                </div>
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-xl font-semibold mb-4">Customizable</h3>
+                    <p class="text-gray-300">Configure model size, training parameters, and more via config files.</p>
+                </div>
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="400">
+                    <h3 class="text-xl font-semibold mb-4">Web Platform</h3>
+                    <p class="text-gray-300">Full-featured web interface for managing models, datasets, and user accounts.</p>
+                </div>
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="500">
+                    <h3 class="text-xl font-semibold mb-4">API Integration</h3>
+                    <p class="text-gray-300">Comprehensive RESTful API for programmatic access.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Structure Section -->
+    <section class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Project Structure</h2>
+            <div class="glass-card p-6 rounded-xl max-w-4xl mx-auto">
+                <div class="code-block">
+                    <code>brahma/
+├── api/              # API server and endpoints
+├── config/           # Configuration files
+├── data/             # Training data
+├── models/           # Model architecture
+├── training/         # Training pipeline
+├── utils/            # Utility functions
+├── inference/        # Inference code
+├── train.py          # Training script
+└── README.md         # Project documentation</code>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start Section -->
+    <section class="py-20" id="get-started">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Quick Start Guide</h2>
+            <div class="glass-card p-6 rounded-xl max-w-4xl mx-auto">
+                <div class="code-block">
+                    <code># Clone the repository
+git clone https://github.com/rawdiv/brahmallm.git
+
+# Navigate to the project directory
+cd brahmallm/brahma
+
+# Install required packages
+pip install -r requirements.txt
+
+# Generate sample data (optional)
+python train.py --create_sample_data --sample_data_size 1000
+
+# Train the model using the default configuration
+python train.py --config config/default_config.json
+
+# Start the web platform
+python start_brahma.py</code>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Join Our Community</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <div class="glass-card p-6 rounded-xl text-center">
+                    <h3 class="text-xl font-semibold mb-4">Discussion Forums</h3>
+                    <p class="text-gray-300 mb-4">Join our GitHub Discussions for community engagement and support.</p>
+                    <a href="https://github.com/yourusername/brahmagpt/discussions" class="text-primary-400 hover:text-primary-300">Join Discussions →</a>
+                </div>
+                <div class="glass-card p-6 rounded-xl text-center">
+                    <h3 class="text-xl font-semibold mb-4">Issue Reporting</h3>
+                    <p class="text-gray-300 mb-4">Report issues or contribute to the project on GitHub.</p>
+                    <a href="https://github.com/yourusername/brahmagpt/issues" class="text-primary-400 hover:text-primary-300">Report Issues →</a>
+                </div>
+                <div class="glass-card p-6 rounded-xl text-center">
+                    <h3 class="text-xl font-semibold mb-4">Direct Support</h3>
+                    <p class="text-gray-300 mb-4">Contact us directly for support and inquiries.</p>
+                    <a href="mailto:support@brahmagpt.ai" class="text-primary-400 hover:text-primary-300">Contact Us →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-6 gradient-text">Stay Updated</h2>
+                <p class="text-gray-300 mb-8">Subscribe to our newsletter for the latest updates and announcements.</p>
+                <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                    <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:border-primary-500">
+                    <button type="submit" class="bg-primary-600 hover:bg-primary-700 px-6 py-3 rounded-lg font-semibold transition-colors">
+                        Subscribe
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gray-800 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold gradient-text mb-4">BRAHMA</h3>
+                    <p class="text-gray-400">India's own open-source large language model.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="/docs" class="text-gray-400 hover:text-white transition-colors">Documentation</a></li>
+                        <li><a href="/api" class="text-gray-400 hover:text-white transition-colors">API</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Community</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://github.com/yourusername/brahmagpt" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.11.82-.26.82-.577v-2.17c-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.73.083-.73 1.205.084 1.84 1.236 1.84 1.236 1.07 1.835 2.807 1.305 3.492.997.108-.775.42-1.305.763-1.605-2.665-.3-5.467-1.332-5.467-5.93 0-1.31.467-2.382 1.236-3.22-.124-.303-.536-1.523.116-3.176 0 0 1.008-.322 3.3 1.23a11.52 11.52 0 013.003-.404c1.02.005 2.045.137 3.003.404 2.29-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.873.118 3.176.77.838 1.235 1.91 1.235 3.22 0 4.61-2.807 5.625-5.48 5.92.43.37.823 1.102.823 2.222v3.293c0 .32.218.694.825.576C20.565 21.798 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>© 2024 BRAHMA. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html> 
